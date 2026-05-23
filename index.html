@@ -1,0 +1,654 @@
+ <!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>UZAI - O'zbekcha AI Platforma</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#f5f7ff;
+overflow-x:hidden;
+color:#111;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+position:fixed;
+left:0;
+top:0;
+width:250px;
+height:100vh;
+background:#ffffff;
+padding:30px 20px;
+box-shadow:0 0 20px rgba(0,0,0,0.05);
+overflow-y:auto;
+z-index:1000;
+}
+
+.logo{
+font-size:32px;
+font-weight:700;
+color:#7b5cff;
+margin-bottom:40px;
+}
+
+.menu{
+display:flex;
+flex-direction:column;
+gap:15px;
+}
+
+.menu a{
+text-decoration:none;
+padding:15px;
+border-radius:14px;
+color:#444;
+font-weight:500;
+transition:0.3s;
+display:block;
+}
+
+.menu a:hover,
+.menu a.active{
+background:linear-gradient(135deg,#7b5cff,#9b7bff);
+color:#fff;
+transform:translateX(5px);
+}
+
+/* MAIN */
+
+.main{
+margin-left:270px;
+padding:30px;
+}
+
+/* TOPBAR */
+
+.topbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:20px;
+margin-bottom:30px;
+flex-wrap:wrap;
+}
+
+.search{
+flex:1;
+min-width:250px;
+background:#fff;
+padding:15px 20px;
+border-radius:16px;
+box-shadow:0 5px 20px rgba(0,0,0,0.05);
+border:none;
+font-size:16px;
+outline:none;
+}
+
+.profile{
+display:flex;
+align-items:center;
+gap:10px;
+background:#fff;
+padding:10px 20px;
+border-radius:16px;
+box-shadow:0 5px 20px rgba(0,0,0,0.05);
+}
+
+.profile img{
+width:45px;
+height:45px;
+border-radius:50%;
+object-fit:cover;
+}
+
+/* HERO */
+
+.hero{
+background:linear-gradient(135deg,#ffffff,#efe9ff);
+border-radius:30px;
+padding:50px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:30px;
+flex-wrap:wrap;
+box-shadow:0 10px 30px rgba(0,0,0,0.05);
+}
+
+.hero-text{
+flex:1;
+min-width:300px;
+}
+
+.hero-text h1{
+font-size:60px;
+line-height:1.1;
+margin-bottom:20px;
+}
+
+.hero-text span{
+color:#7b5cff;
+}
+
+.hero-text p{
+font-size:18px;
+color:#555;
+margin-bottom:30px;
+line-height:1.7;
+}
+
+.buttons{
+display:flex;
+gap:15px;
+flex-wrap:wrap;
+}
+
+.btn{
+padding:15px 30px;
+border:none;
+border-radius:16px;
+font-size:16px;
+font-weight:600;
+cursor:pointer;
+transition:0.3s;
+}
+
+.primary{
+background:linear-gradient(135deg,#7b5cff,#9d7dff);
+color:#fff;
+}
+
+.secondary{
+background:#fff;
+color:#444;
+box-shadow:0 5px 20px rgba(0,0,0,0.08);
+}
+
+.btn:hover{
+transform:translateY(-3px);
+}
+
+.robot{
+width:350px;
+max-width:100%;
+animation:float 4s ease-in-out infinite;
+}
+
+@keyframes float{
+0%{
+transform:translateY(0px);
+}
+50%{
+transform:translateY(-15px);
+}
+100%{
+transform:translateY(0px);
+}
+}
+
+/* CARDS */
+
+.cards{
+margin-top:40px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+}
+
+.card{
+background:#fff;
+padding:30px;
+border-radius:24px;
+box-shadow:0 10px 25px rgba(0,0,0,0.05);
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-10px);
+}
+
+.card h3{
+margin-top:15px;
+margin-bottom:10px;
+font-size:22px;
+}
+
+.card p{
+color:#666;
+font-size:14px;
+line-height:1.6;
+}
+
+/* SECTIONS */
+
+.section{
+margin-top:40px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(350px,1fr));
+gap:20px;
+}
+
+.box{
+background:#fff;
+padding:25px;
+border-radius:24px;
+box-shadow:0 10px 25px rgba(0,0,0,0.05);
+}
+
+.box h2{
+margin-bottom:20px;
+}
+
+/* CHAT */
+
+.chat{
+height:250px;
+overflow-y:auto;
+background:#f7f7ff;
+padding:20px;
+border-radius:18px;
+margin-bottom:15px;
+}
+
+.message{
+background:#7b5cff;
+color:#fff;
+padding:12px 18px;
+border-radius:14px;
+width:max-content;
+max-width:80%;
+margin-bottom:15px;
+line-height:1.5;
+animation:fade 0.5s ease;
+word-wrap:break-word;
+}
+
+.reply{
+background:#ececff;
+color:#111;
+}
+
+@keyframes fade{
+from{
+opacity:0;
+transform:translateY(10px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+.input-area{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+}
+
+.input-area input{
+flex:1;
+padding:14px;
+border:none;
+background:#f1f1ff;
+border-radius:14px;
+outline:none;
+min-width:200px;
+}
+ .input-area button{
+padding:14px 20px;
+border:none;
+border-radius:14px;
+background:#7b5cff;
+color:#fff;
+cursor:pointer;
+font-weight:600;
+}
+
+/* IMAGES */
+
+.images{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:10px;
+}
+
+.images img{
+width:100%;
+height:160px;
+object-fit:cover;
+border-radius:16px;
+transition:0.3s;
+}
+
+.images img:hover{
+transform:scale(1.03);
+}
+
+/* VIDEO */
+
+.video{
+position:relative;
+overflow:hidden;
+border-radius:20px;
+}
+
+.video img{
+width:100%;
+display:block;
+border-radius:20px;
+}
+
+.play{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+background:#fff;
+width:80px;
+height:80px;
+border-radius:50%;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:30px;
+color:#7b5cff;
+box-shadow:0 10px 30px rgba(0,0,0,0.2);
+cursor:pointer;
+}
+
+/* FOOTER */
+
+.footer{
+margin-top:50px;
+text-align:center;
+color:#666;
+padding:30px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+
+.sidebar{
+position:relative;
+width:100%;
+height:auto;
+}
+
+.main{
+margin-left:0;
+padding:20px;
+}
+
+.hero{
+text-align:center;
+justify-content:center;
+padding:30px;
+}
+
+.hero-text h1{
+font-size:42px;
+}
+
+.robot{
+width:250px;
+}
+
+.section{
+grid-template-columns:1fr;
+}
+
+}
+
+@media(max-width:500px){
+
+.hero-text h1{
+font-size:34px;
+}
+
+.cards{
+grid-template-columns:1fr;
+}
+
+.images{
+grid-template-columns:1fr;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+<div class="logo">UZAI</div>
+
+<div class="menu">
+<a href="#" class="active">🏠 Bosh sahifa</a>
+<a href="#">💬 AI Chat</a>
+<a href="#">🖼 AI Rasm</a>
+<a href="#">🎬 AI Video</a>
+<a href="#">🎓 AI Teacher</a>
+<a href="#">📈 Biznes AI</a>
+<a href="#">💎 Tariflar</a>
+<a href="#">👤 Profil</a>
+</div>
+
+</div>
+
+<!-- MAIN -->
+
+<div class="main">
+
+<!-- TOPBAR -->
+
+<div class="topbar">
+
+<input type="text" class="search" placeholder="Qidirish...">
+
+<div class="profile">
+<img src="https://i.pravatar.cc/100" alt="user">
+<b>Foydalanuvchi</b>
+</div>
+
+</div>
+
+<!-- HERO -->
+
+<div class="hero">
+
+<div class="hero-text">
+
+<h1>Kelajak <span>bugundan</span> boshlanadi</h1>
+
+<p>
+UZAI — O'zbekcha sun'iy intellekt platformasi.
+Chat qiling, rasm yarating, video montaj qiling va AI imkoniyatlaridan foydalaning.
+</p>
+
+<div class="buttons">
+<button class="btn primary">Boshlash</button>
+<button class="btn secondary">AI Chatga o'tish</button>
+</div>
+
+</div>
+
+<img
+class="robot"
+src="https://cdn-icons-png.flaticon.com/512/4712/4712109.png"
+alt="robot">
+
+</div>
+
+<!-- CARDS -->
+
+<div class="cards">
+
+<div class="card">
+<h3>💬 AI Chat</h3>
+<p>O'zbek tilida aqlli suhbat.</p>
+</div>
+
+<div class="card">
+<h3>🖼 AI Rasm</h3>
+<p>Matndan professional rasm yaratish.</p>
+</div>
+
+<div class="card">
+<h3>🎬 AI Video</h3>
+<p>Avtomatik video montaj tizimi.</p>
+</div>
+
+<div class="card">
+<h3>🎓 AI Teacher</h3>
+<p>Fanlarni AI bilan o'rganing.</p>
+</div>
+
+</div>
+
+<!-- SECTION -->
+
+<div class="section">
+
+<!-- CHAT -->
+
+<div class="box">
+
+<h2>💬 AI Chat</h2>
+
+<div class="chat" id="chat">
+
+<div class="message">
+Assalomu alaykum! Men UZAI. Sizga qanday yordam bera olaman?
+</div>
+
+</div>
+
+<div class="input-area">
+
+<input
+type="text"
+id="msg"
+placeholder="Xabar yozing...">
+
+<button onclick="sendMessage()">
+Yuborish
+</button>
+
+</div>
+
+</div>
+
+<!-- IMAGES -->
+
+<div class="box">
+
+<h2>🖼 AI Rasm Generator</h2>
+
+<div class="images">
+
+<img src="https://picsum.photos/300/200?1" alt="">
+<img src="https://picsum.photos/300/200?2" alt="">
+<img src="https://picsum.photos/300/200?3" alt="">
+<img src="https://picsum.photos/300/200?4" alt="">
+
+</div>
+
+</div>
+
+<!-- VIDEO -->
+
+<div class="box">
+
+<h2>🎬 AI Video Generator</h2>
+
+<div class="video">
+
+<img src="https://picsum.photos/600/350" alt="video">
+
+<div class="play">▶</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- FOOTER -->
+
+<div class="footer">
+© 2026 UZAI — Kelajakdagi O'zbekcha AI Platforma
+</div>
+
+</div>
+
+<script>
+
+function sendMessage(){
+
+var input=document.getElementById("msg");
+var chat=document.getElementById("chat");
+
+if(input.value.trim()===""){
+return;
+}
+
+var div=document.createElement("div");
+
+div.className="message";
+
+div.innerHTML=input.value;
+ chat.appendChild(div);
+
+chat.scrollTop=chat.scrollHeight;
+
+input.value="";
+
+setTimeout(function(){
+
+var reply=document.createElement("div");
+
+reply.className="message reply";
+
+reply.innerHTML="UZAI javobi: So'rovingiz qabul qilindi.";
+
+chat.appendChild(reply);
+
+chat.scrollTop=chat.scrollHeight;
+
+},1000);
+
+}
+
+/* ENTER BOSILGANDA YUBORISH */
+
+document.getElementById("msg").addEventListener("keypress",function(e){
+
+if(e.key==="Enter"){
+sendMessage();
+}
+
+});
+
+</script>
+
+</body>
+</html>
